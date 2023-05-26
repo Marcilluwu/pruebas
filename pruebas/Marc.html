@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NSFW Button</title>
+	<style>
+		.button {
+			width: 1500px;
+			height: 500px;
+			background-color: red;
+			color: black;
+			font-size: 24px;
+			font-weight: bold;
+		}
+		
+		.carousel-container {
+			display: none;
+		}
+		
+		.carousel-image {
+			display: none;
+			max-width: 100%;
+			height: auto;
+		}
+	</style>
+	<script>
+		function showRickAstley() {
+			var button = document.getElementById("nsfwButton");
+			button.disabled = true; // Desactivar el botón después de hacer clic
+			
+			var carouselContainer = document.getElementById("carouselContainer");
+			carouselContainer.style.display = "block"; // Mostrar el contenedor del carrusel
+			
+			var rickrollImages = [
+				"rickroll1.jpg",
+				"rickroll2.jpg",
+				"rickroll3.jpg",
+				"rickroll4.jpg"
+			];
+			
+			var rickrollAudio = new Audio("never_gonna_give_you_up.mp3");
+			
+			for (var i = 0; i < rickrollImages.length; i++) {
+				var img = document.createElement("img");
+				img.src = rickrollImages[i];
+				img.classList.add("carousel-image");
+				carouselContainer.appendChild(img);
+			}
+			
+			rickrollAudio.play();
+			
+			setTimeout(startCarousel, 5000); // Iniciar el carrusel después de 5 segundos
+		}
+		
+		function startCarousel() {
+			var images = document.getElementsByClassName("carousel-image");
+			var currentIndex = 0;
+			
+			// Mostrar la primera imagen
+			images[currentIndex].style.display = "block";
+			
+			setInterval(function() {
+				// Ocultar la imagen actual
+				images[currentIndex].style.display = "none";
+				
+				// Actualizar el índice de la siguiente imagen
+				currentIndex = (currentIndex + 1) % images.length;
+				
+				// Mostrar la siguiente imagen
+				images[currentIndex].style.display = "block";
+			}, 2000); // Cambiar de imagen cada 2 segundos
+		}
+	</script>
+</head>
+<body>
+	<button id="nsfwButton" class="button" onclick="showRickAstley()">NSFW</button>
+	<div id="carouselContainer" class="carousel-container">
+	</div>
+</body>
+</html>
+
